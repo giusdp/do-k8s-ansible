@@ -33,7 +33,7 @@ worker1     Ready     20m       v1.22.4
 - installs kubectl on control_plane node
 - inits cluster with kubeadm on control_plane
 - installs flannel networking on cluster
-- joins the nodes in the cluster
+- joins workers to cluster
 
 <!-- # Resetting the environment
 
