@@ -1,0 +1,3 @@
+do-terraform/.terraform*
+do-terraform/*.tfvars
+do-terraform/terraform*
