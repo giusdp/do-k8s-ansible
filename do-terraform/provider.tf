@@ -13,6 +13,8 @@ variable "do_token" {}
 
 variable "pvt_key" {}
 
+# variable "pub_key" {}
+
 # Configure the DigitalOcean Provider
 provider "digitalocean" {
   token = var.do_token
@@ -52,4 +54,22 @@ resource "digitalocean_project_resources" "learnk8s-droplets" {
     digitalocean_droplet.control.urn,
     digitalocean_droplet.worker.urn,
   ]
+}
+
+output "control_ip_address" {
+  value = digitalocean_droplet.control.ipv4_address
+}
+
+output "worker_ip_address" {
+  value = digitalocean_droplet.worker.ipv4_address
+}
+
+resource "local_file" "hosts" {
+  content = templatefile("hosts.tmpl",
+    {
+      control_ip = digitalocean_droplet.control.ipv4_address
+      worker_ip  = digitalocean_droplet.worker.ipv4_address
+    }
+  )
+  filename = "../hosts.ini"
 }
