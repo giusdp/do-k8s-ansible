@@ -13,8 +13,6 @@ variable "do_token" {}
 
 variable "pvt_key" {}
 
-# variable "pub_key" {}
-
 # Configure the DigitalOcean Provider
 provider "digitalocean" {
   token = var.do_token
@@ -71,5 +69,5 @@ resource "local_file" "hosts" {
       worker_ip  = digitalocean_droplet.worker.ipv4_address
     }
   )
-  filename = "../hosts.ini"
+  filename = "../ansible/hosts.ini"
 }
