@@ -1,0 +1,34 @@
+---
+
+- name: Add prometheus helm charts
+  become_user: ubuntu
+  ansible.builtin.shell:
+    cmd: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+- name: Update helm repos
+  become_user: ubuntu
+  ansible.builtin.shell:
+    cmd: helm repo update
+
+- name: Deploy prometheus chart
+  become_user: ubuntu
+  ansible.builtin.shell:
+    cmd: helm install prometheus prometheus-community/prometheus
+
+- name: Add NodePort for prometheus server
+  become_user: ubuntu
+  k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: prometheus-np
+      spec:
+        selector:
+          app: prometheus
+        ports:
+          - port: 9090
+            targetPort: 9090
+            nodePort: 30000
+        type: NodePort

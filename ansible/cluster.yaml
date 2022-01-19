@@ -27,6 +27,18 @@
 - hosts: control_plane
   gather_facts: yes
   become: yes
+  roles:
+    - { role: nfs }
+
+- hosts: control_plane
+  gather_facts: yes
+  become: yes
+  roles:
+    - { role: prometheus }
+
+- hosts: control_plane
+  gather_facts: yes
+  become: yes
   tasks:
     - name: "Healthcheck role"
       include_role:

@@ -17,7 +17,7 @@
   file:
     path: $HOME/.kube
     state: directory
-    mode: 0755
+    mode: 0700
 
 - name: copy admin.conf to user's kube config
   copy:
@@ -25,6 +25,8 @@
     dest: /home/ubuntu/.kube/config
     remote_src: yes
     owner: ubuntu
+    group: ubuntu
+    mode: 0700
 
 - name: install Pod network
   become: yes

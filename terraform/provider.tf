@@ -29,7 +29,7 @@ data "digitalocean_project" "learnk8s" {
 resource "digitalocean_droplet" "control" {
   image  = "ubuntu-20-04-x64"
   name   = "control1"
-  region = "fra1"
+  region = "lon1"
   size   = "s-2vcpu-4gb"
   ssh_keys = [
     data.digitalocean_ssh_key.sshkey.id
@@ -39,8 +39,8 @@ resource "digitalocean_droplet" "control" {
 resource "digitalocean_droplet" "worker" {
   image  = "ubuntu-20-04-x64"
   name   = "worker1"
-  region = "fra1"
-  size   = "s-1vcpu-1gb"
+  region = "lon1"
+  size   = "s-2vcpu-4gb"
   ssh_keys = [
     data.digitalocean_ssh_key.sshkey.id
   ]
